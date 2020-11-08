@@ -1,7 +1,6 @@
 <template>
 <div>
   <form class="SearchForm">
-<div>
   <div class="SearchDiv">
     <span class="SearchLens">
       <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -17,7 +16,6 @@
       v-on:keyup.enter.stop="Search"
     />
   </div>
-</div>
 </form>
 
 <h2 v-if="searchResult">검색결과</h2>
@@ -56,7 +54,7 @@ export default {
       this.$axios.get(`https://cors-anywhere.herokuapp.com/https://itunes.apple.com/search?term=${this.keyword}&country=kr&entity=software`)
       .then((response) => {
         this.searchResult = response.data;
-        console.log(this.searchResult);
+        // console.log(this.searchResult);
       });
     },
     iTune(url) {

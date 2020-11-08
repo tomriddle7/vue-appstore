@@ -69,7 +69,7 @@ export default {
     this.$axios.get(`https://cors-anywhere.herokuapp.com/https://itunes.apple.com/lookup?id=${this.id}&country=KR`)
       .then((response) => {
         this.productDetail = response.data.results[0];
-        console.log(this.productDetail);
+        // console.log(this.productDetail);
       });
   },
   methods: {
@@ -77,7 +77,7 @@ export default {
       window.open(url, '_blank');
     },
     goBack() {
-      this._location.back();
+      window.history.back();
     }
   }
 }
