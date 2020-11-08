@@ -1,53 +1,27 @@
 <template>
-  <div>
-    <div class="header">
-      <nav>
-        <ul>
-          <li>
-            <router-link to="/home">Home</router-link>
-          </li>
-          <li>
-            <router-link to="/app">Apps</router-link>
-          </li>
-          <li>
-            <router-link to="/game">Game</router-link>
-          </li>
-          <li>
-            <router-link to="/search">Search</router-link>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="container">
-      <router-view></router-view>
-    </div>
+<div>
+  <div class="header">
+    <nav>
+      <ul>
+        <li><router-link to="/home"><font-awesome-icon icon="clipboard" /><br>Home</router-link></li>
+        <li><router-link to="/application"><font-awesome-icon icon="layer-group" /><br>Apps</router-link></li>
+        <li><router-link to="/game"><font-awesome-icon icon="rocket" /><br>Game</router-link></li>
+        <li><router-link to="/search"><font-awesome-icon icon="search" /><br>Search</router-link></li>
+      </ul>
+    </nav>
   </div>
+
+  <div class="container">
+    <router-view></router-view>
+  </div>
+</div>
 </template>
-
 <script>
-import Home from './components/Home.vue';
-import Apps from './components/Apps.vue';
-import Game from './components/Game.vue';
-import Search from './components/Search.vue';
-import VueRouter from 'vue-router';
-
-const router = new VueRouter({
-  routes : [
-    { path: '/', components: Home },
-    { path: '/home', components: Home },
-    { path: '/app', components: Apps },
-    { path: '/game', components: Game },
-    { path: '/search', components: Search },
-  ]
-});
-
 export default {
-  name : 'app',
-  router
+  name : 'app'
 }
-</script>
 
+</script>
 <style>
 .header {
   color: white;
@@ -65,6 +39,7 @@ export default {
 ul {
   display: flex;
   list-style-type: none;
+  padding-inline-start: 0px;
 }
 li {
   width: 25vw;
@@ -73,17 +48,19 @@ li {
   color: #ffffff;
   transition: color 0.2s ease-in-out;
 }
-router-link {
+li.a {
   height: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
 a{
   text-decoration:none;
   color:inherit;
+}
+a.router-link-exact-active {
+  color: #0b84fe;
 }
 *{
   box-sizing:border-box;
