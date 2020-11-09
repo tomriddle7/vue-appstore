@@ -1,34 +1,45 @@
 <template>
-<div>
-  <Products v-bind:appData="topFreeApps">
-  </Products>
-  <Products v-bind:appData="topPaidApps">
-  </Products>
-</div>
+  <div>
+    <Loader v-if="loading" />
+    <div v-if="!loading">
+      <toggle-button v-model="checked" />
+      <Products v-if="!checked" v-bind:appData="topFreeApps" />
+      <Products v-if="checked" v-bind:appData="topPaidApps" />
+    </div>
+  </div>
 </template>
 <script>
+import Loader from "./Loader";
 import Products from "./Products";
 
 export default {
-  name : "application",
-  components: { Products },
-  created: function() {
-    this.$axios.get("https://cors-anywhere.herokuapp.com/https://rss.itunes.apple.com/api/v1/kr/ios-apps/top-free/all/25/explicit.json")
-      .then((response) => {
-        this.topFreeApps = response.data.feed;
-        // console.log(this.topFreeApps);
-      });
-    this.$axios.get("https://cors-anywhere.herokuapp.com/https://rss.itunes.apple.com/api/v1/kr/ios-apps/top-paid/all/25/explicit.json")
-      .then((response) => {
-        this.topPaidApps = response.data.feed;
-        // console.log(this.topPaidApps);
-      });
+  name: "application",
+  components: { Loader, Products },
+  async created() {
+    try {
+      const response1 = await this.$axios.get(
+        "https://cors-anywhere.herokuapp.com/https://rss.itunes.apple.com/api/v1/kr/ios-apps/top-free/all/25/explicit.json"
+      );
+      const response2 = await this.$axios.get(
+        "https://cors-anywhere.herokuapp.com/https://rss.itunes.apple.com/api/v1/kr/ios-apps/top-paid/all/25/explicit.json"
+      );
+
+      this.topFreeApps = response1.data.feed;
+      this.topPaidApps = response2.data.feed;
+    } catch (e) {
+      this.error = "Can't find app information.";
+    } finally {
+      this.loading = false;
+    }
   },
   data() {
     return {
       topFreeApps: null,
-      topPaidApps: null
-    }
-  }
-}
+      topPaidApps: null,
+      checked: false,
+      error: "",
+      loading: true,
+    };
+  },
+};
 </script>
