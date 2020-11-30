@@ -2,7 +2,10 @@
   <div>
     <Loader v-if="loading" />
     <div v-if="!loading">
-      <toggle-button v-model="checked" />
+      <ToggleButton
+        :defaultState="true"
+        v-on:change="eventHandler"
+      />
       <Products v-if="!checked" v-bind:appData="topFreeGames" />
       <Products v-if="checked" v-bind:appData="topPaidGames" />
     </div>
@@ -11,10 +14,11 @@
 <script>
 import Loader from "./Loader";
 import Products from "./Products";
+import ToggleButton from "./ToggleButton";
 
 export default {
   name: "game",
-  components: { Loader, Products },
+  components: { Loader, Products, ToggleButton },
   async created() {
     try {
       const response1 = await this.$axios.get(
@@ -40,6 +44,11 @@ export default {
       error: "",
       loading: true,
     };
+  },
+  methods: {
+    eventHandler(value) {
+      this.checked = !value;
+    }
   },
 };
 </script>

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
 import axios from 'axios';
-import ToggleButton from 'vue-js-toggle-button'
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faClipboard, faRocket, faLayerGroup, faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons'
@@ -18,7 +17,6 @@ Vue.config.productionTip = false
 library.add(faClipboard, faRocket, faLayerGroup, faSearch, faSpinner);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.use(VueRouter);
-Vue.use(ToggleButton);
 
 const router = new VueRouter({
   routes : [
