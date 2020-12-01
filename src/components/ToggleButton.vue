@@ -1,7 +1,10 @@
 <template>
     <label :for="id + '_button'" :class="{'active': isActive}" class="toggle__button">
         <input type="checkbox" :disabled="disabled" :id="id + '_button'" v-model="checkedValue">
-        <span class="toggle__switch"></span>
+        <div class="toggle__switch">
+            <div class="toggle__switch-on">FREE</div>
+            <div class="toggle__switch-off">PAID</div>
+        </div>
     </label>
 </template>
 
@@ -89,7 +92,7 @@ export default {
     width: 1px;
     height: 1px;
 }
-.toggle__button .toggle__switch {
+.toggle__button {
     display: block;
     height: 32px;
     border-radius:6px;
@@ -97,6 +100,28 @@ export default {
     background: #2a2a2c;
     position: relative;
     transition: all 0.3s;
+}
+
+/* 토글 버튼의 바탕 */
+.toggle__switch {
+  overflow: hidden;
+  background-color: #2a2a2c;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px 0 rgba(50, 50, 50, 0.75);
+  transition: background-color 0.3s;
+}
+
+/* 토글 버튼의 텍스트 */
+.toggle__switch-on,
+.toggle__switch-off {
+  float: left;
+  width: 50%;
+  height: 100%;
+  line-height: 32px;
+  font-family: Lato, sans-serif;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
 }
 
 .toggle__button .toggle__switch::after, 
